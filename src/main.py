@@ -22,7 +22,7 @@ async def clear(ctx, amount=None):
     else:
         await ctx.channel.purge(limit=int(amount))
 
-#uses jisho website to get a word from japanese dictionary and translates it into spanish
+#uses jisho website to get a word from japanese dictionary and translates to spanish
 @bot.command(aliases=['jisho'])
 async def jisho_dictionary(ctx, word):
     embed = Embed(title='Jisho Dictionary', description=f'Palabra: {word}\nTraduccion: {jisho_traduction(word)[1]}', color=242424)
