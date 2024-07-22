@@ -1,0 +1,12 @@
+PyQt5
+requests
+BeautifulSoup4
+deep-translator
+discord==1.7.3
+discord-py-slash-command==2.0.0
+discord.py==1.7.3
+discord.py[voice]
+discord_webhook==1.3.0
+discord-ext-bot==1.0.1
+python-firebase==1.2
+python-dotenv==1.0.0
