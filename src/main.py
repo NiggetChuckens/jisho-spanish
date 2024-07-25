@@ -1,7 +1,6 @@
 import os
 from discord.ext import commands
 from discord import Embed
-from discord_webhook import DiscordWebhook, DiscordEmbed
 from dotenv import load_dotenv
 from jisho.jisho import jisho_traduction, get_jisho_sentence
 
