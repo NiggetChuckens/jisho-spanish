@@ -22,7 +22,7 @@ async def clear(ctx, amount=None):
         await ctx.channel.purge(limit=int(amount))
 
 #uses jisho website to get a word from japanese dictionary and translates to spanish
-@bot.command(aliases=['jisho2'])
+@bot.command(aliases=['jisho'])
 async def jisho_dictionary(ctx, word):
     response = get_jisho_sentence(word)
     try:
