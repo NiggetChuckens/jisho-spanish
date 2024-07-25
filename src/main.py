@@ -25,7 +25,16 @@ async def clear(ctx, amount=None):
 @bot.command(aliases=['jisho'])
 async def jisho_dictionary(ctx, word):
     response = get_jisho_sentence(word)
-    try:
+    
+    if response == []:
+        response = jisho_traduction(word)
+        embed = Embed(
+            title='Jisho Dictionary', 
+            description=f'Palabra: {word}\nTraduccion: {jisho_traduction(response)[1]}', 
+            color=242424
+        )
+        await ctx.send(embed=embed)
+    if response != []:
         embed = Embed(
             title='Jisho Dictionary', 
             description='', 
@@ -33,16 +42,8 @@ async def jisho_dictionary(ctx, word):
         )
         for words in response:
             embed.description += f'Palabra: {words}\nTraduccion: {jisho_traduction(words)[1]}\n\n'
+        await ctx.send(embed=embed)
     
-    except:
-        response = jisho_traduction(word)
-        embed = Embed(
-            title='Jisho Dictionary', 
-            description=f'Palabra: {word}\nTraduccion: {jisho_traduction(response)[1]}', 
-            color=242424
-        )
-
-    await ctx.send(embed=embed)
     
 
 bot.run(token)
