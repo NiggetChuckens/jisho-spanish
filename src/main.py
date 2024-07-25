@@ -3,7 +3,7 @@ from discord.ext import commands
 from discord import Embed
 from discord_webhook import DiscordWebhook, DiscordEmbed
 from dotenv import load_dotenv
-from jisho.jisho import jisho_traduction
+from jisho.jisho import jisho_traduction, get_jisho_sentence
 
 load_dotenv()
 token = os.getenv('YUKI-TEST')  
@@ -23,9 +23,26 @@ async def clear(ctx, amount=None):
         await ctx.channel.purge(limit=int(amount))
 
 #uses jisho website to get a word from japanese dictionary and translates to spanish
-@bot.command(aliases=['jisho'])
+@bot.command(aliases=['jisho2'])
 async def jisho_dictionary(ctx, word):
-    embed = Embed(title='Jisho Dictionary', description=f'Palabra: {word}\nTraduccion: {jisho_traduction(word)[1]}', color=242424)
+    response = get_jisho_sentence(word)
+    try:
+        embed = Embed(
+            title='Jisho Dictionary', 
+            description='', 
+            color=242424
+        )
+        for words in response:
+            embed.description += f'Palabra: {words}\nTraduccion: {jisho_traduction(words)[1]}\n\n'
+    
+    except:
+        response = jisho_traduction(word)
+        embed = Embed(
+            title='Jisho Dictionary', 
+            description=f'Palabra: {word}\nTraduccion: {jisho_traduction(response)[1]}', 
+            color=242424
+        )
+
     await ctx.send(embed=embed)
     
 
